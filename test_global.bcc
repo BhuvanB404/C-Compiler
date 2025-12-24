@@ -1,0 +1,19 @@
+global1;
+global2;
+
+main() {
+    auto x;
+    extern putchar;
+    
+    global1 = 65;
+    global2 = 66;
+    
+    x = global1;
+    putchar(x);
+    
+    x = global2;
+    putchar(x);
+    
+    x = global1 + 10;
+    putchar(x);
+}

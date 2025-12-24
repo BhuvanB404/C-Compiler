@@ -1,0 +1,23 @@
+main()
+{
+    auto a;
+    auto b;
+    auto result;
+    extern putchar;
+    extern print_num;
+    
+    a = 10;
+    b = 5;
+    
+    result = a + b;
+    print_num(result);
+    putchar(10);
+    
+    result = a - b;
+    print_num(result);
+    putchar(10);
+    
+    result = a * b;
+    print_num(result);
+    putchar(10);
+}

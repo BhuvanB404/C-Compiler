@@ -1,0 +1,20 @@
+main()
+{
+    auto a;
+    auto b;
+    auto add;
+    auto sub;
+    auto mul;
+    extern putchar;
+    
+    a = 10;
+    b = 5;
+    
+    add = a + b;
+    sub = a - b;
+    mul = a * b;
+    
+    putchar(add + 48);
+    putchar(sub + 48);
+    putchar(mul + 2);
+}

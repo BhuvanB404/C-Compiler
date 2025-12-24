@@ -1,0 +1,19 @@
+base;
+n;
+
+display() {
+    extern putchar;
+    putchar(n);
+}
+
+main() {
+    base = 65;
+    n = base;
+    display();
+    
+    n = base + 1;
+    display();
+    
+    n = base + 2;
+    display();
+}

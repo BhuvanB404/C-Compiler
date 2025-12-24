@@ -1,0 +1,18 @@
+
+
+
+main() {
+    auto a;
+    extern putchar, some_external;
+    
+    a = 10;
+    
+    
+    putchar(a);
+    
+    
+    some_external = 42;
+    
+    
+    putchar(some_external);
+}

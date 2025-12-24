@@ -1,0 +1,12 @@
+main() {
+    extern putchar;
+    auto a;
+    auto b;
+    auto result;
+    
+    a = 32;
+    b = 33;
+    
+    result = a + b;
+    putchar(result);
+}

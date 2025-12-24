@@ -1,0 +1,63 @@
+
+# Ignore everything by default
+*
+
+# Allow specific compiler source files
+!main.cpp
+!Tokenizer.cpp
+!Parser.cpp
+!ir.cpp
+!generator.cpp
+!CodeGen.cpp
+
+# Allow specific compiler headers
+!main.h
+!Tokenizer.h
+!Parser.h
+!generator.h
+!CodeGen.h
+!LICENSE
+
+# Allow Makefile
+!Makefile
+
+# Allow tests
+!tests/
+!tests/**
+
+# Allow documentation
+!README.md
+!runtime.c
+
+# Keep .gitignore itself
+!.gitignore
+
+# Ignore specific file types
+*.pdf
+*.txt
+*.b
+*.bak
+*.o
+*.asm
+!*.bcc
+*.ir
+
+# Ignore executables and build artifacts
+bcompiler
+test_parser
+bboop
+bcc
+main
+E
+test_out
+test2_out
+test_global
+test_globals2
+test_globals3
+tmp
+build/
+.vscode/
+.env
+not-related/
+leaf/
+summary.txt

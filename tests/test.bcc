@@ -1,0 +1,38 @@
+main()
+{
+    extern putchar;
+    auto h;
+    auto e;
+    auto l1;
+    auto l2;
+    auto o;
+    auto space;
+    auto w;
+    auto r;
+    auto d;
+    auto exclaim;
+    
+    h = 72;
+    e = 101;
+    l1 = 108;
+    l2 = 108;
+    o = 111;
+    space = 32;
+    w = 87;
+    r = 114;
+    d = 100;
+    exclaim = 33;
+    
+    putchar(h);
+    putchar(e);
+    putchar(l1);
+    putchar(l2);
+    putchar(o);
+    putchar(space);
+    putchar(w);
+    putchar(o);
+    putchar(r);
+    putchar(l1);
+    putchar(d);
+    putchar(exclaim);
+}

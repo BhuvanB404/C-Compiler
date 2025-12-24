@@ -1,0 +1,6 @@
+main() {
+    extern putchar;
+    auto result;
+    result = 100 + 20 - 10 * 2 / 2;
+    putchar(result);
+}

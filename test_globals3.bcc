@@ -1,0 +1,16 @@
+base;
+offset;
+
+main() {
+    extern putchar;
+    auto result;
+    
+    base = 65;
+    offset = 2;
+    
+    result = base + offset;
+    putchar(result);
+    
+    result = base + offset + offset;
+    putchar(result);
+}
