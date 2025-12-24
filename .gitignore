@@ -24,6 +24,10 @@
 # Allow tests
 !tests/
 !tests/**
+!src/
+!src/**
+!lib/
+!lib/**
 
 # Allow documentation
 !README.md
