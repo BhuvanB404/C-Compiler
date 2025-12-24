@@ -6,12 +6,13 @@ TARGET = compiler
 
 SOURCES = main.cpp \
           Tokenizer.cpp \
-          Parser.cpp \
-          ir.cpp \
-          generator.cpp \
-          CodeGen.cpp
-
-HEADERS = main.h \
+SRC_DIR = src
+SOURCES = $(SRC_DIR)/main.cpp \
+          $(SRC_DIR)/Tokenizer.cpp \
+          $(SRC_DIR)/Parser.cpp \
+          $(SRC_DIR)/ir.cpp \
+          $(SRC_DIR)/generator.cpp \
+          $(SRC_DIR)/CodeGen.cpp
           Tokenizer.h \
           Parser.h \
           generator.h \
@@ -24,20 +25,20 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
+all: compiler
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
-
-%.o: %.cpp $(HEADERS)
+compiler: $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o compiler $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-clean:
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 	rm -f *.o $(TARGET) $(TEST_TARGET) *.ir
 
-test: $(TARGET)
+	rm -f $(SRC_DIR)/*.o compiler test_parser *.ir
 	./$(TARGET) test_global.bcc --print-ir
 
-unit-tests: $(TEST_SOURCES) $(filter-out main.o, $(OBJECTS))
+	./compiler tests/test.b --print-ir
 	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_SOURCES) $(filter-out main.cpp, $(SOURCES))
 	./$(TEST_TARGET)
-
-.PHONY: all clean test unit-tests
+	$(CXX) $(CXXFLAGS) -o test_parser $(TEST_SOURCES) $(filter-out $(SRC_DIR)/main.cpp, $(SOURCES))
+	./test_parser
