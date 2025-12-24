@@ -1,44 +1,47 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -g
 
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++17 -g
+
+SRC_DIR = src
+INC_DIR = lib
 TARGET = compiler
 
-
-SOURCES = main.cpp \
-          Tokenizer.cpp \
-SRC_DIR = src
 SOURCES = $(SRC_DIR)/main.cpp \
-          $(SRC_DIR)/Tokenizer.cpp \
-          $(SRC_DIR)/Parser.cpp \
-          $(SRC_DIR)/ir.cpp \
-          $(SRC_DIR)/generator.cpp \
-          $(SRC_DIR)/CodeGen.cpp
-          Tokenizer.h \
-          Parser.h \
-          generator.h \
-          CodeGen.h
+		  $(SRC_DIR)/Tokenizer.cpp \
+		  $(SRC_DIR)/Parser.cpp \
+		  $(SRC_DIR)/ir.cpp \
+		  $(SRC_DIR)/generator.cpp \
+		  $(SRC_DIR)/CodeGen.cpp
+
+HEADERS = $(INC_DIR)/main.h \
+		  $(INC_DIR)/Tokenizer.h \
+		  $(INC_DIR)/Parser.h \
+		  $(INC_DIR)/generator.h \
+		  $(INC_DIR)/CodeGen.h
+
+OBJECTS = $(SOURCES:.cpp=.o)
 
 TEST_SOURCES = tests/test_parser.cpp
 TEST_TARGET = test_parser
 
-OBJECTS = $(SOURCES:.cpp=.o)
-
 all: $(TARGET)
 
-all: compiler
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
-compiler: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o compiler $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $(TARGET) $(OBJECTS)
+
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-	rm -f *.o $(TARGET) $(TEST_TARGET) *.ir
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
-	rm -f $(SRC_DIR)/*.o compiler test_parser *.ir
-	./$(TARGET) test_global.bcc --print-ir
+clean:
+	rm -f $(SRC_DIR)/*.o $(TARGET) $(TEST_TARGET) *.ir
 
-	./compiler tests/test.b --print-ir
-	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_SOURCES) $(filter-out main.cpp, $(SOURCES))
+test: $(TARGET)
+	./$(TARGET) tests/test.b --print-ir
+
+unit-tests: $(TEST_SOURCES) $(filter-out $(SRC_DIR)/main.o, $(OBJECTS))
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $(TEST_TARGET) $(TEST_SOURCES) $(filter-out $(SRC_DIR)/main.cpp, $(SOURCES))
 	./$(TEST_TARGET)
-	$(CXX) $(CXXFLAGS) -o test_parser $(TEST_SOURCES) $(filter-out $(SRC_DIR)/main.cpp, $(SOURCES))
-	./test_parser
+
+.PHONY: all clean test unit-tests
