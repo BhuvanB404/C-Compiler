@@ -1,9 +1,9 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -g
 
-TARGET = bcompiler
+TARGET = compiler
 
-# Compiler source files and headers
+
 SOURCES = main.cpp \
           Tokenizer.cpp \
           Parser.cpp \
@@ -17,7 +17,6 @@ HEADERS = main.h \
           generator.h \
           CodeGen.h
 
-# Unit tests
 TEST_SOURCES = tests/test_parser.cpp
 TEST_TARGET = test_parser
 
