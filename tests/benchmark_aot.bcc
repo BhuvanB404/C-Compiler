@@ -1,0 +1,19 @@
+main() {
+    auto i;
+    auto sum;
+    auto n;
+    auto t;
+
+    i = 0;
+    sum = 0;
+    n = 20000000;
+
+    while (i < n) {
+        t = i * 3;
+        t = t + 7;
+        sum = sum + t;
+        i = i + 1;
+    }
+
+    return (0);
+}
